@@ -159,7 +159,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController2 : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //Invoke the cs script generated from the Input Action Asset
     PlayerControls controls;
     Vector2 move;
-    public float speed = 10;
+    Vector2 rotate;
+    public float movement_speed = 10;
+    public float rotation_speed = 10;
     public float jump_force = 100f;
     public float max_jumps = 1;
     private bool isJumping = false;
@@ -24,34 +26,44 @@ public class PlayerController2 : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         //context (ctx) = Lambda Expression. Meaning it is currently not set to anything yet
-        controls.Player.Move.performed += ctx =>
-            SendMessage(ctx.ReadValue<Vector2>());
+        //controls.Player.Move.performed += ctx =>
+            //SendMessage(ctx.ReadValue<Vector2>());
         controls.Player.Move.performed += ctx => move =
             ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => move = Vector2.zero;
-
         controls.Player.Jump.performed += ctx =>
             Jump();
-            
+        controls.Player.Camera.performed += ctx =>
+            SendMessage(ctx.ReadValue<Vector2>());
+        controls.Player.Camera.performed += ctx => rotate = 
+            ctx.ReadValue<Vector2>();
+        controls.Player.Camera.canceled += ctx => rotate = 
+            Vector2.zero;
+
     }
 
     //Physics based updated
     void FixedUpdate()
     {
-        Vector3 movement = new Vector3(move.x, 0.0f, move.y) * speed *
+        Vector3 movement = new Vector3(move.x, 0.0f, move.y) * movement_speed *
             Time.deltaTime;
-        transform.Translate(movement, Space.World);
+        Vector3 rotation = new Vector3(0.0f, rotate.x, 0.0f) * rotation_speed *
+            Time.deltaTime;
+        transform.Translate(movement, Space.Self);
+        transform.Rotate(rotation, Space.Self);
 
         if (GroundCheck() && isJumping)
         {
             jumps_used = 0;
             anim.SetBool("grounded", true);
+            //Debug.Log("Grounded");
             isJumping= false;
 
         }
         if (!GroundCheck())
         {
             anim.SetBool("grounded", false);
+            //Debug.Log("Not Grounded");
             isJumping = true;
         }
     }

@@ -353,7 +353,7 @@ MonoBehaviour:
     width: 100
     height: 100
   m_Visualization: 1
-  m_ActionReference: {fileID: 5590589153922405091, guid: c6d7e0ac74f96304395d5886892dc587, type: 3}
+  m_ActionReference: {fileID: 5803118022004709439, guid: c6d7e0ac74f96304395d5886892dc587, type: 3}
   m_ActionName: 
   m_ShowControlName: 0
 --- !u!4 &619234399
@@ -598,6 +598,7 @@ GameObject:
   - component: {fileID: 1094100963}
   - component: {fileID: 1094100965}
   - component: {fileID: 1094100964}
+  - component: {fileID: 1094100966}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -671,6 +672,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1094100966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094100962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5bfb6cd0cb10f419cc9cc7830b96cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1592369268}
+  camera_speed: 30
 --- !u!1 &1193030847
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +855,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1592369275
 MonoBehaviour:
@@ -884,15 +899,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb896ee0a0a11844fa7368ca63b8c250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  speed: 10
+  movement_speed: 10
+  rotation_speed: 40
   jump_force: 600
   max_jumps: 1
-  isJumping: 0
-  jumps_used: 0
-  rb: {fileID: 0}
-  anim: {fileID: 0}
   layerMask:
+    serializedVersion: 2
     m_Bits: 8
 --- !u!1001 &1812755298
 PrefabInstance:
